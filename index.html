@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Langkah Kaki - Penghitung Langkah Harian</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(145deg, #1a472a 0%, #0e2a1a 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .card {
+            background: rgba(255,255,245,0.95);
+            border-radius: 3rem;
+            max-width: 500px;
+            width: 100%;
+            padding: 2rem 1.5rem;
+            box-shadow: 0 25px 45px -12px rgba(0,0,0,0.5);
+            text-align: center;
+            backdrop-filter: blur(2px);
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: scale(1.01);
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #2d5a2c;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .sub {
+            color: #4a6741;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .steps-display {
+            background: #2d5a2c;
+            border-radius: 3rem;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.2), 0 5px 10px rgba(0,0,0,0.1);
+        }
+
+        .steps-number {
+            font-size: 5rem;
+            font-weight: 800;
+            color: #f9f3d9;
+            line-height: 1;
+            font-family: monospace;
+            letter-spacing: 4px;
+        }
+
+        .steps-label {
+            color: #d9e3b5;
+            font-weight: 500;
+            margin-top: 0.5rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        button {
+            background: #4c8b3c;
+            border: none;
+            padding: 0.8rem 1.8rem;
+            border-radius: 3rem;
+            font-size: 1rem;
+            font-weight: bold;
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            transition: 0.1s linear;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+        }
+
+        button:active {
+            transform: scale(0.97);
+        }
+
+        .btn-reset {
+            background: #9e2d2f;
+        }
+
+        .btn-reset:hover {
+            background: #b13e40;
+        }
+
+        button:hover {
+            background: #3a6b2d;
+        }
+
+        footer {
+            margin-top: 2rem;
+            font-size: 0.7rem;
+            color: #6c7a5a;
+            border-top: 1px solid #cdd9b6;
+            padding-top: 1rem;
+        }
+
+        @media (max-width: 450px) {
+            .steps-number { font-size: 3.5rem; }
+            button { padding: 0.6rem 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h1>👣 Langkah Kaki</h1>
+    <div class="sub">Hitung langkah harianmu menuju sehat</div>
+
+    <div class="steps-display">
+        <div class="steps-number" id="stepCount">0</div>
+        <div class="steps-label">Total Langkah Hari Ini</div>
+    </div>
+
+    <div class="btn-group">
+        <button id="addStepBtn">➕ Tambah Langkah</button>
+        <button id="resetBtn" class="btn-reset">🔄 Reset</button>
+    </div>
+
+    <footer>
+        💡 Setiap langkah kecil berarti | Simulasi proyek Git untuk latihan Pull Request & Code Review
+    </footer>
+</div>
+
+<script>
+    // Kode JavaScript sederhana untuk mengelola langkah
+    let steps = localStorage.getItem('langkahKaki') ? parseInt(localStorage.getItem('langkahKaki')) : 0;
+    const stepDisplay = document.getElementById('stepCount');
+    const addBtn = document.getElementById('addStepBtn');
+    const resetBtn = document.getElementById('resetBtn');
+
+    function updateDisplay() {
+        stepDisplay.innerText = steps;
+        localStorage.setItem('langkahKaki', steps);
+    }
+
+    addBtn.addEventListener('click', () => {
+        steps += 1;
+        updateDisplay();
+        // animasi kecil
+        stepDisplay.style.transform = 'scale(1.1)';
+        setTimeout(() => { stepDisplay.style.transform = 'scale(1)'; }, 150);
+    });
+
+    resetBtn.addEventListener('click', () => {
+        if (confirm('Reset semua langkah hari ini?')) {
+            steps = 0;
+            updateDisplay();
+        }
+    });
+
+    updateDisplay();
+</script>
+</body>
+</html>
