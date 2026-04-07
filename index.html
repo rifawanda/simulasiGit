@@ -151,17 +151,7 @@
     </footer>
 </div>
 
-<script>
-    <script>
-  let progress = 0;
-  const progressBar = document.getElementById("progressBar");
-
-  function tambahLangkah() {
-    progress += 1000; // tiap langkah nambah
-    if (progress > 10000) progress = 10000;
-    progressBar.value = progress;
-  }
-</script>
+<script>
     let steps = localStorage.getItem('langkahKaki') ? parseInt(localStorage.getItem('langkahKaki')) : 0;
     const stepDisplay = document.getElementById('stepCount');
     const addBtn = document.getElementById('addStepBtn');
